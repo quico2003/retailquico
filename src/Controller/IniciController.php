@@ -1,12 +1,18 @@
 <?php
 namespace App\Controller;
-use Symfony\Component\HttpFoundation\Response as Res;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-class InicioController {
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+class IniciController extends AbstractController{
 
     #[Route('/', name:'inici')]
     public function inici(){
-        return new Res("Projecte Gestio Retail de 2n DAW.");
+        return $this->render('base.html.twig');
+    }
+
+    #[Route('/inici', name:'inici1')]
+    public function SeccionInici(){
+        return $this->render('inici.html.twig');
     }
 
 }

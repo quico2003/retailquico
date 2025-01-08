@@ -2,8 +2,10 @@
 namespace App\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
-class SeccioController {
+
+class SeccioController extends AbstractController{
 
     private $arraySeccions = array(
         array("codi" => 1, "nom" => "Roba",
@@ -15,6 +17,12 @@ class SeccioController {
         array("codi" => 4, "nom" => "Calzat",
         "descripcio" => "calzat deportiu i casual", "articles" => array("Nike", "Adidas", "New Balans", "Off-Wite")),
     );
+
+
+    #[Route('/seccio1', name: 'dates_seccio1')]
+    public function seccio1() {
+        return $this->render('dades_seccio.html.twig');
+    }
 
     #[Route('/seccio/{codi<\d+>?1}', name: 'dades_seccio')]
 public function seccio($codi)

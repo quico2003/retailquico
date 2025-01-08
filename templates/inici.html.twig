@@ -1,0 +1,16 @@
+{# templates/inici.html.twig #}
+{% extends 'base.html.twig' %}
+{% block title %}Contactes{% endblock %}
+{%  block stylesheets %}
+{{ parent() }}
+<link href="{{ asset('kaira/css/estilsInici.css') }}" rel="stylesheet" />
+
+{% endblock %}
+{% block body %}
+
+<h2 id="titolinici">Inici Programa Gestio Retail Quico Blesa</h2>
+<p id="paragrafinici">Este es un programa de retail creado para la clase de desplegament de 2ºDAW.</p>
+<img class="imatgeinici" src="{{ asset('kaira/images/instituto.png')}}">
+
+
+{% endblock %}
