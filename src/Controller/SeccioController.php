@@ -3,25 +3,43 @@ namespace App\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Service\ServeiDadesSeccio;
 
 
 class SeccioController extends AbstractController{
 
-    private $arraySeccions = array(
-        array("codi" => 1, "nom" => "Roba",
-        "descripcio" => "Articles de roba masculina i femenina", "articles" => array("Camisa", "Pantalons", "Jersey", "Jaqueta")),
-        array("codi" => 2, "nom" => "Video Consoles",
-        "descripcio" => "Consoles de diferents tipus de modalitat", "articles" => array("Ps5", "Ps4", "Wii", "Nintendo")),
-        array("codi" => 3, "nom" => "Menjar",
-        "descripcio" => "Aliments en general", "articles" => array("Barritas", "Pasta", "Fruta", "Conservas")),
-        array("codi" => 4, "nom" => "Calzat",
-        "descripcio" => "calzat deportiu i casual", "articles" => array("Nike", "Adidas", "New Balans", "Off-Wite")),
-    );
+    private $dadesSeccions;
+    public function __construct(ServeiDadesSeccio $dadesSeccions){
+        $this->dadesSeccions = $dadesSeccions;
+    }
 
 
     #[Route('/seccio1', name: 'dates_seccio1')]
     public function seccio1() {
-        return $this->render('dades_seccio.html.twig');
+        return $this->render('dades_seccio.html.twig', array('arraySeccions' => $this->dadesSeccions->get()));
+    }
+
+    #[Route('/seccio1/detall/{codi<\d+>?1}', name: 'detall')]
+    public function detall(int $codi){
+
+        $longitudArray = count($this->dadesSeccions->get());
+
+        if ($codi >= 0 && $codi <= $longitudArray) {
+            $resultat = array_filter($this->dadesSeccions->get(), function($seccio) use ($codi){
+                return $seccio["codi"] == $codi;
+            });
+    
+            if (count($resultat)>0) {
+                return $this -> render('detall.html.twig', array('seccio' => array_shift($resultat)));
+            }
+        }else{
+
+            return new Response("<h1>Codigo seccion no encotrado</h1>");
+
+        }
+        
+        
+        
     }
 
     #[Route('/seccio/{codi<\d+>?1}', name: 'dades_seccio')]

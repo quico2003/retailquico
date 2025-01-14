@@ -2,13 +2,26 @@
 {% extends 'base.html.twig' %}
 {% block title %}Seccions{% endblock %}
 {%  block stylesheets %}
-<link href="{{ asset('kaira/css/estilsSeccio.css') }}" rel="stylesheet" />
+<link href="{{ asset('css/estilsSeccio.css') }}" rel="stylesheet" />
 
 {% endblock %}
 {% block body %}
 
-<h1 id='titolSeccio'>Dades Seccio</h1>
-<p class="paragrafSeccio">Imatge Seccio</p>
-<img src="{{ asset('')}}"/>
+<h1 id='titolseccio'>Dades Seccio:</h1>
+
+<div class="container">
+{% for section in arraySeccions %}
+    
+    
+    <div class="carta">
+        <h4 id='entityseccio'>{{ section.nom }}</h4>
+        <a href="{{ path('detall', {'codi': section.codi}) }}">
+            <img class='imatgeseccio' src="{{ section.imatge }}" />
+        </a>
+    </div>     
+
+{% endfor %}
+
+</div>
 
 {% endblock %}

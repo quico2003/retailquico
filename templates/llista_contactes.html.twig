@@ -5,8 +5,8 @@
 {% if contactes %}
     {% for contacte in contactes %}
         {{ include ('dades_contacte.html.twig', { 'contacte': contacte })}}
-{% endfor %}
+    {% endfor %}
 {% else %}
- <p>No se han trobat contactes</p>
+<p>No se han trobat contactes</p>
 {% endif%}
 {% endblock %}
